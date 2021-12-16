@@ -15,11 +15,16 @@ use Illuminate\Database\Eloquent\Collection;
 class QRService
 {
 
-    public function generateQR(Collection $profiles): string
+    public function generateSticky(Collection $profiles): string
     {
-        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'ANSCI', false);
-        $pdf_width = 210;
-        $pdf_height = 297;
+        // L \ P
+        $pdf = new \TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'ANSCI', false);
+        $pdf_width = 285;
+        $pdf_height = 210;
+        $rows_num = 2;
+        $colums_num = 4;
+        $qr_size = 70;
+
 
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('kxxo.ru');
@@ -50,34 +55,47 @@ class QRService
         $pdf->setFontSubsetting(true);
 
         foreach ($profiles as $i => $profile) {
+            $row = $i % $rows_num;
+            $column = ( $i / $rows_num ) % $colums_num;
+
+            /**
+             * Check add page
+             */
             /** @var $profile Profile */
-            if ($i % 3 === 0) {
+            if ($i % ($colums_num * $rows_num) === 0) {
                 $pdf->AddPage();
-                $pdf->Line($pdf_width / 2, 0, $pdf_width / 2, $pdf_height); // vertical
-                $pdf->Line(0, $pdf_height / 3, $pdf_width, $pdf_height / 3); // vertical
-                $pdf->Line(0, $pdf_height / 3 * 2, $pdf_width, $pdf_height / 3 * 2);
+                for($j = 1;$j<$colums_num;$j++) {
+                    $pdf->Line($pdf_width / $colums_num * $j, 0, $pdf_width / $colums_num * $j, $pdf_height); // vertical
+                }
+                for($j = 1;$j<$rows_num;$j++) {
+                    $pdf->Line(0, $pdf_height / $rows_num * $j, $pdf_width, $pdf_height / $rows_num * $j); // horizontal
+                }
+                $pdf->Line($pdf_width, 0, $pdf_width, $pdf_height); // vertical
+
             }
 
 
-            $pdf->SetFont('freesans', '', 12);
-            $pdf->MultiCell(
-                0,
-                0,
-                "Password:\n" . $profile->password,
-                0,
-                'C',
-                false,
-                1,
-                110,
-                40 + ($i % 3 * $pdf_height / 3),
-                true,
-                0,
-                false,
-                true,
-                0,
-                'T',
-                false
-            );
+//            $pdf->SetFont('freesans', '', 12);
+//            $pdf->MultiCell(
+//                0,
+//                0,
+//                "Password:\n" . $profile->password,
+//                0,
+//                'C',
+//                false,
+//                1,
+//                110,
+//                40 + ($i % $rows_num * $pdf_height / $rows_num),
+//                true,
+//                0,
+//                false,
+//                true,
+//                0,
+//                'T',
+//                false
+//            );
+
+
 
             $style = array(
                 'border' => 0,
@@ -88,19 +106,28 @@ class QRService
                 'module_width' => 1, // width of a single module in points
                 'module_height' => 1 // height of a single module in points
             );
-            $code = 'https://auto.kxxo.ru/show/' . $profile->id;
-            $pdf->write2DBarcode($code, 'QRCODE,M', 13, 5 + ($i % 3 * ($pdf_height / 3)), 80, 80, $style, 'N');
-            $pdf->SetFont('freesans', '', 15);
+            $code = getenv('FRONTEND_APP_URL') . '/show/' . $profile->id;
+
+            $pdf->write2DBarcode($code, 'QRCODE,M',
+                1 + (($column) * ($pdf_width / $colums_num)),
+//                2,
+                //2 + ($i % $rows_num * ($pdf_height / $rows_num)),
+                15 + (($row) * ($pdf_height / $rows_num)),
+                $qr_size, $qr_size, $style, 'N');
+
+
+
+            $pdf->SetFont('freesans', '', 4);
             $pdf->MultiCell(
-                $pdf_width / 2,
-                1,
-                "МЕШАЕТ АВТОМОБИЛЬ?",
+                15,
+                15,
+                $profile->id,
                 0,
                 'C',
                 false,
                 1,
-                0,
-                85 + ($i % 3 * ($pdf_height / 3)),
+                $pdf_width-6 + $column*3,
+                10 + (($row) * ($pdf_height / $rows_num)),
                 true,
                 0,
                 false,

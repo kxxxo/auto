@@ -61,8 +61,8 @@ Route::get('/telegram-confirm', function () {
 });
 
 Route::get('/qr', function (QRService $QRService) {
-    $profiles = Profile::all();
-    return $QRService->generateQR($profiles);
+    $profiles = Profile::orderBy('id')->get();
+    return $QRService->generateSticky($profiles);
 });
 Route::get('/generate', function (ProfileService $profileService) {
     $profileService->generateProfiles(50);
