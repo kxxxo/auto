@@ -65,6 +65,12 @@
         #send-code-form {
             display: none;
         }
+        @media (max-width: 627px) {
+            button {
+                margin-top: 5px;
+                width: 250px;
+            }
+        }
     </style>
 </head>
 <body>
