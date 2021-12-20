@@ -66,8 +66,9 @@ class AuthController extends Controller
             'hash' => 'required|string',
             'profile_id' => 'integer'
         ]);
-//        $profile_id = $data['profile_id'];
-//        unset($data['profile_id']);
+        $profile_id = $data['profile_id'];
+        unset($data['profile_id']);
+        var_dump($data);
         $user = $this->telegramService->authorize($data);
         $user_token = $user->createToken('token')->plainTextToken;
         return redirect(
