@@ -115,7 +115,8 @@ function ProfileConfig() {
         <section className="u-align-left u-clearfix u-section-1" id="sec-c88f">
             <div className="u-clearfix u-sheet u-valign-middle u-sheet-1">
                 <div className="u-align-center u-container-style u-grey-5 u-group u-group-1" style={{
-                    maxWidth: "747px",
+                    width: "747px",
+                    maxWidth: '100%',
                     minHeight: "843px",
                     margin: "60px auto"
                 }}>
