@@ -56,6 +56,8 @@ class AuthController extends Controller
      */
     public function tg(Request $request)
     {
+        var_dump($request->all());
+        die();
         $data = $request->validate([
             'id' => 'required|string',
             'first_name' => 'required|string',
