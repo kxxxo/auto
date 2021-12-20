@@ -62,6 +62,8 @@ class VkService
                 'redirect_uri' => getenv('SOCIAL_VK_REDIRECT_URL'),
                 'code' => $code
             ]);
+        echo $url;
+        die();
         $response = Http::get($url);
         if ($response->ok()) {
             $access_token = $response->json('access_token');
