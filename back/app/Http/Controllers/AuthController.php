@@ -44,7 +44,7 @@ class AuthController extends Controller
         $user_token = $user->createToken('token')->plainTextToken;
         return redirect(
             sprintf(
-                "%s/auth?code=%s",
+                "%s/authorization/=%s",
                 getenv('FRONTEND_APP_URL'),
                 $user_token
             )
@@ -69,7 +69,7 @@ class AuthController extends Controller
         $user_token = $user->createToken('token')->plainTextToken;
         return redirect(
             sprintf(
-                "%s/auth?code=%s",
+                "%s/authorization/%s",
                 getenv('FRONTEND_APP_URL'),
                 $user_token
             )
