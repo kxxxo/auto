@@ -18,22 +18,16 @@ class TelegramService
         data-request-access="write"></script>';
 
     /**
-     * @var \App\Services\Notification\TelegramService
-     */
-    protected $telegram;
-    /**
      * @var ProfileService
      */
     private $profileService;
 
     /**
      * VkService constructor.
-     * @param TelegramService $telegram
      * @param ProfileService $profileService
      */
-    public function __construct(TelegramService $telegram, ProfileService $profileService)
+    public function __construct(ProfileService $profileService)
     {
-        $this->telegram = $telegram;
         $this->profileService = $profileService;
     }
 
