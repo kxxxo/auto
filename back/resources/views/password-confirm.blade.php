@@ -25,6 +25,7 @@
 
         #password-input {
             width: 250px;
+            text-align: center;
         }
 
         input {
@@ -62,6 +63,7 @@
             button {
                 margin-top: 5px;
                 width: 250px;
+
             }
         }
 
