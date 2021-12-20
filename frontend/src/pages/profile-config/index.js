@@ -15,8 +15,6 @@ function ProfileConfig() {
 
     useEffect(() => {
         if(!loaded) {
-
-
             axios.get(process.env.REACT_APP_API_DOMAIN + "/api/profile", {
                 headers: {
                     "Authorization": localStorage.getItem('Authorization')
@@ -37,7 +35,7 @@ function ProfileConfig() {
                                     setUrlArray({
                                         'vk': response.data.vk_url,
                                         'telegram': response.data.telegram_url,
-                                        'email': response.data.email_url,
+                                        'mail': response.data.email_url,
                                         'telephone': response.data.telephone_url,
                                         'whatsapp': response.data.telephone_url,
                                     });
