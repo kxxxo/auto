@@ -66,9 +66,14 @@
             display: none;
         }
         @media (max-width: 627px) {
-            button {
+            button#send-telephone {
+                margin-top: 5px;
+                width: 250px;
+            }
+            button#resend-code, button#send-code {
                 margin-top: 5px;
                 width: 185px;
+
             }
         }
     </style>
@@ -88,6 +93,7 @@
         <input type='text'
                placeholder="000000"
                id="code-input"
+               style="text-align: center"
         >
         <button id="resend-code">
             <span class="glyphicon glyphicon-repeat"></span>
