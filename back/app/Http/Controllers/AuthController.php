@@ -64,7 +64,7 @@ class AuthController extends Controller
             'photo_url' => 'required|string',
             'auth_date' => 'required|string',
             'hash' => 'required|string',
-            'profile_id' => 'integer'
+            'profile_id' => 'required|integer'
         ]);
         $profile_id = $data['profile_id'];
         unset($data['profile_id']);
