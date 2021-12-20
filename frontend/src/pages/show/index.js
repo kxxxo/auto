@@ -20,10 +20,11 @@ function Show() {
     });
 
     useEffect(() => {
+        console.log("USE EFFECT");
         axios.get(process.env.REACT_APP_API_DOMAIN + "/api/get-profile?id=" + id,{
         })
             .then(response => {
-                if(response) {
+                if(response && response.data) {
                     if(response.data.vk === null
                         && response.data.telegram === null
                         && response.data.telephone === null
@@ -33,7 +34,7 @@ function Show() {
                         window.location.href = process.env.REACT_APP_API_DOMAIN + '/password-confirm/?id=' + id;
                     } else {
                         setLoaded(true);
-                        setData(data);
+                        setData(response.data);
                     }
                 } else {
                     window.location = '/';
@@ -44,7 +45,7 @@ function Show() {
                 window.location = '/';
             });
 
-    });
+    }, [(new Date()).getDay()]);
 
     if(!loaded) {
         return null;

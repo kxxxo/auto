@@ -13,6 +13,7 @@ import Authorization from "./pages/authorization"
 import Show from "./pages/show";
 import CheckToken from "./pages/check-token";
 import ProfileConfig from "./pages/profile-config";
+import FooterWithAuthorization from "./components/footer/footer-with-authorization";
 
 /**
  * @returns {JSX.Element}
@@ -42,23 +43,26 @@ function App() {
                 <Switch>
                     <Route path="/authorization/:token">
                         <CheckToken/>
+                        <Footer/>
                     </Route>
                     <Route path="/authorization">
                         <Authorization/>
+                        <Footer/>
                     </Route>
                     <Route path="/show/:id">
                         <Show/>
+                        <FooterWithAuthorization/>
                     </Route>
                     <Route path="/profile-config">
                         <ProfileConfig/>
+                        <Footer/>
                     </Route>
-
                     <Route path="/">
                         <Index/>
+                        <Footer/>
                     </Route>
                 </Switch>
             </Router>
-            <Footer/>
         </Fragment>
     );
 }
