@@ -57,7 +57,9 @@ Route::prefix('/password-confirm')->group(function () {
 
 
 Route::get('/telegram-confirm', function () {
-    return view('telegram-confirm');
+    return view('telegram-confirm')->with([
+        'profile_id' => 123
+    ]);
 });
 
 Route::get('/qr', function (QRService $QRService) {
