@@ -68,11 +68,8 @@ class AuthController extends Controller
         ]);
         $profile_id = $data['profile_id'];
         unset($data['profile_id']);
-        var_dump($data);
         $user = $this->telegramService->authorize($data);
         $user_token = $user->createToken('token')->plainTextToken;
-        echo $user_token;
-        die();
         return redirect(
             sprintf(
                 "%s/authorization/%s",
