@@ -59,7 +59,7 @@ class VkService
         $url = self::ACCESS_TOKEN_URL . '?' . http_build_query([
                 'client_id' => getenv('SOCIAL_VK_CLIENT_ID'),
                 'client_secret' => getenv('SOCIAL_VK_SECRET_KEY'),
-                'redirect_uri' => route('auth.vk.success'),
+                'redirect_uri' => getenv('SOCIAL_VK_REDIRECT_URL'),
                 'code' => $code
             ]);
         $response = Http::get($url);

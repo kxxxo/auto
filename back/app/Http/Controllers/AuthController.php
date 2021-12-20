@@ -64,6 +64,7 @@ class AuthController extends Controller
             'photo_url' => 'required|string',
             'auth_date' => 'required|string',
             'hash' => 'required|string',
+            'profile_id' => 'required|integer'
         ]);
         $user = $this->telegramService->authorize($data);
         $user_token = $user->createToken('token')->plainTextToken;
