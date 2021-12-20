@@ -68,7 +68,7 @@
         @media (max-width: 627px) {
             button {
                 margin-top: 5px;
-                width: 250px;
+                width: 185px;
             }
         }
     </style>
