@@ -30,26 +30,20 @@ Route::prefix('/auth')->group(function () {
 });
 
 Route::prefix('/telephone-confirm')->group(function () {
-    Route::get('/', function () {
-        return view('telephone-confirm');
-    })->name('web.telephone-confirm');
+    Route::get('/', [TelephoneConfirmController::class,'index'])->name('web.telephone-confirm');
     Route::get('/send-code', [TelephoneConfirmController::class,'sendCode']);
     Route::get('/resend-code', [TelephoneConfirmController::class,'resendCode']);
     Route::get('/auth', [TelephoneConfirmController::class,'auth']);
 });
 Route::prefix('/email-confirm')->group(function () {
-    Route::get('/', function () {
-        return view('email-confirm');
-    })->name('web.email-confirm');
+    Route::get('/', [EmailConfirmController::class,'index'])->name('web.email-confirm');
     Route::get('/send-code', [EmailConfirmController::class,'sendCode']);
     Route::get('/resend-code', [EmailConfirmController::class,'resendCode']);
     Route::get('/auth', [EmailConfirmController::class,'auth']);
 });
 Route::prefix('/password-confirm')->group(function () {
     Route::get('/', function (Request $request) {
-        //            'profile_id' => $request->get('id')
         return view('password-confirm', [
-
         ]);
     })->name('web.password-confirm');
     Route::get('/auth', [PasswordConfirmController::class,'auth']);

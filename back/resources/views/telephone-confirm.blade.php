@@ -138,7 +138,7 @@
                 .css('visibility', 'visible');
         } else {
             $.get("/telephone-confirm/send-code", {
-                telephone: value
+                telephone: value,
             }).done(function (data) {
                 $(".error").css('visibility', 'hidden');
                 $("#send-telephone-form").hide();
@@ -174,7 +174,8 @@
         let code = $("#code-input").val();
         $.get("/telephone-confirm/auth", {
             telephone: telephone,
-            code: code
+            code: code,
+            access_token: '{{ $access_token }}'
         }).done(function (data) {
             if (data) {
                 document.location.replace('<?= getenv('FRONTEND_APP_URL') ?>/authorization/' + data);

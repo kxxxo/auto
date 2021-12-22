@@ -46,12 +46,12 @@ class ProfileService
     private function create(User $user): Profile
     {
         $profile = (
-        new Profile(
-            [
-                'user_id' => $user->id,
-                'password' => rand(10000000, 99999999)
-            ]
-        )
+            new Profile(
+                [
+                    'user_id' => $user->id,
+                    'password' => rand(10000000, 99999999)
+                ]
+            )
         );
         if (!$profile->save()) {
             throw new Exception("Profile save error");

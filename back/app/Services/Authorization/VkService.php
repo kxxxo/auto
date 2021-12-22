@@ -45,9 +45,9 @@ class VkService
     {
         return self::AUTH_URL . '?' . http_build_query([
                 'client_id' => getenv('SOCIAL_VK_CLIENT_ID'),
-                'redirect_uri' => route('web.auth.vk'),
                 'scope' => 4194304  // email
                     + 65536, // offline
+                'redirect_uri' => route('web.auth.vk'),
             ]);
     }
 

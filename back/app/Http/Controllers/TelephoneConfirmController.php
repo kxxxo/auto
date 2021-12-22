@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\Authorization\TelephoneService;
 use Exception;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class TelephoneConfirmController extends Controller
 {
@@ -15,8 +16,11 @@ class TelephoneConfirmController extends Controller
     {
         $this->telephoneService = $telephoneService;
     }
-    public function index()
+    public function index(Request $request)
     {
+        return view('telephone-confirm')->with([
+            'access_token' => $request->get('access_token')
+        ]);
     }
 
     /**
@@ -58,10 +62,18 @@ class TelephoneConfirmController extends Controller
         $data = $request->validate([
             'telephone' => 'required|string',
             'code' => 'required|string',
+            'access_token' => 'string'
         ]);
         $code = $data['code'];
         $telephone = $data['telephone'];
-        $user = $this->telephoneService->authorize($telephone, $code);
+        $access_token = $data['access_token'];
+        $user = null;
+        if($access_token) {
+            /** @var PersonalAccessToken $model */
+            $user = PersonalAccessToken::findToken(substr($access_token,7))->tokenable()->first();
+        }
+
+        $user = $this->telephoneService->authorize($telephone, $code, $user);
         if ($user) {
             return $user->createToken('token')->plainTextToken;
         } else {

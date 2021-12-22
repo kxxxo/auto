@@ -35,7 +35,7 @@ class TelegramService
     /**
      * @throws Exception
      */
-    public function authorize($data): User
+    public function authorize($data, $user = null): User
     {
         $tg_id = $data['id'];
         $tg_first_name = $data["first_name"];
@@ -49,7 +49,8 @@ class TelegramService
                 $tg_first_name,
                 $tg_last_name,
                 $tg_username,
-                $tg_photo_url
+                $tg_photo_url,
+                $user
             );
             return $profile_vk->profile->user;
         }

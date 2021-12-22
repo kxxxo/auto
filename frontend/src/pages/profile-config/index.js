@@ -83,7 +83,7 @@ function ProfileConfig() {
             marginTop: '10px'
         };
         let onClick = function(){
-            window.location.href = urlArray[module];
+            window.location.href = urlArray[module] + '?access_token=' + localStorage.getItem('Authorization');
         };
         if(data) {
             if(data.is_enable) {

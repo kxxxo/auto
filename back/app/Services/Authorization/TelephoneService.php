@@ -97,10 +97,10 @@ class TelephoneService
     /**
      * @throws Exception
      */
-    public function authorize($telephone, $code): ?User
+    public function authorize($telephone, $code, $user = null): ?User
     {
         if ($this->check($telephone, $code)) {
-            $profile_whatsapp = $this->profileService->connectWithWhatsapp($telephone);
+            $profile_whatsapp = $this->profileService->connectWithWhatsapp($telephone,$user);
             $profile_telephone = $this->profileService->connectWithTelephone(
                 $telephone,
                 $profile_whatsapp->profile->user

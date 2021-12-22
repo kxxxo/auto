@@ -8,6 +8,7 @@ use App\Services\Authorization\VkService;
 use App\Services\Authorization\EmailService;
 use Exception;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -64,11 +65,17 @@ class AuthController extends Controller
             'photo_url' => 'required|string',
             'auth_date' => 'required|string',
             'hash' => 'required|string',
-            'profile_id' => 'required|integer'
+            'access_token' => 'string'
         ]);
-        $profile_id = $data['profile_id'];
-        unset($data['profile_id']);
-        $user = $this->telegramService->authorize($data);
+        $access_token = $data['access_token'];
+        unset($data['access_token']);
+        $user = null;
+        if($access_token) {
+            /** @var PersonalAccessToken $model */
+            $user = PersonalAccessToken::findToken(substr($access_token,7))->tokenable()->first();
+        }
+
+        $user = $this->telegramService->authorize($data, $user);
         $user_token = $user->createToken('token')->plainTextToken;
         return redirect(
             sprintf(

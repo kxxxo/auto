@@ -95,10 +95,10 @@ class EmailService
     /**
      * @throws Exception
      */
-    public function authorize($email, $code): ?User
+    public function authorize($email, $code, $user = null): ?User
     {
         if ($this->check($email, $code)) {
-            return $this->profileService->connectWithEmail($email)->profile->user;
+            return $this->profileService->connectWithEmail($email, $user)->profile->user;
         } else {
             return null;
         }

@@ -169,7 +169,8 @@
         let code = $("#code-input").val();
         $.get("/email-confirm/auth", {
             email: email,
-            code: code
+            code: code,
+            access_token: '{{ $access_token }}'
         }).done(function (data) {
             if (data) {
                 document.location.replace('<?= getenv('FRONTEND_APP_URL') ?>/authorization/' + data);
