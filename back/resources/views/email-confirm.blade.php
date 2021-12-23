@@ -92,7 +92,7 @@
         </button>
     </div>
     <div id="send-code-form">
-        <input type='text'
+        <input type='number'
                placeholder="000000"
                id="code-input"
                style="text-align: center"

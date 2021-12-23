@@ -74,7 +74,7 @@
 <div class="center">
     <div id="send-password-form">
         <label for="password-input"></label>
-        <input type='text'
+        <input type='number'
            placeholder="XXXXXXXX"
            id="password-input"
         >
