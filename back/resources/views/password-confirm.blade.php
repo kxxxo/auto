@@ -74,7 +74,7 @@
 <div class="center">
     <div id="send-password-form">
         <h3 style="text-align: center;">Введите пароль</h3>
-        <br/>        <br/>
+        <br/>
         <label for="password-input"></label>
         <input type='text'
            placeholder="XXXXXXXX"
