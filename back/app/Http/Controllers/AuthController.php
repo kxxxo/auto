@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\Authorization\TelegramService;
 use App\Services\Authorization\TelephoneService;
 use App\Services\Authorization\VkService;
@@ -72,7 +73,7 @@ class AuthController extends Controller
         unset($data['access_token']);
         $user = null;
         if($access_token) {
-            /** @var PersonalAccessToken $model */
+            /** @var $user User */
             $user = PersonalAccessToken::findToken(substr($access_token,7))->tokenable()->first();
         }
 

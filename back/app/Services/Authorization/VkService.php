@@ -7,6 +7,7 @@ use App\Services\Notification\TelegramService;
 use App\Services\Portal\User\ProfileService;
 use Exception;
 use Illuminate\Support\Facades\Http;
+use Laravel\Sanctum\PersonalAccessToken;
 
 /**
  * Class TelegramService
@@ -64,11 +65,13 @@ class VkService
             ]);
         $response = Http::get($url);
         if ($response->ok()) {
+            /** @var $user User */
+            $user = PersonalAccessToken::findToken(substr($access_token,7))->tokenable()->first();
             $access_token = $response->json('access_token');
             $vk_user_id = $response->json('user_id');
             $email = $response->json('email');
             if ($this->check($access_token)) {
-                $profile_vk = $this->profileService->connectWithVk($vk_user_id, $access_token, $email);
+                $profile_vk = $this->profileService->connectWithVk($vk_user_id, $access_token, $email, $user);
                 return $profile_vk->profile->user;
             }
         } else {
