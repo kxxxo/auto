@@ -7,6 +7,7 @@ use App\Http\Controllers\TelephoneConfirmController;
 use App\Models\Profile;
 use App\Services\Portal\User\ProfileService;
 use App\Services\Portal\User\QRService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,9 +51,9 @@ Route::prefix('/password-confirm')->group(function () {
 });
 
 
-Route::get('/telegram-confirm', function () {
+Route::get('/telegram-confirm', function (Request $request) {
     return view('telegram-confirm')->with([
-        'profile_id' => 123
+        'access_token' => $request->get('access_token')
     ]);
 });
 
