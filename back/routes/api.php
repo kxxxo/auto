@@ -114,7 +114,7 @@ Route::get('/get-profile', function (Request $request) {
             'profiles.id as id',
             'profile_vks.external_id as vk',
             'profile_mails.external_id as mail',
-            'profile_telegrams.username as telegram',
+            'profile_telegrams.external_id as telegram',
             'profile_whatsapps.external_id as whatsapp',
             'profile_telephones.external_id as telephone',
         ])
