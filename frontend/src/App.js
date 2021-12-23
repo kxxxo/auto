@@ -45,10 +45,10 @@ function App() {
                         <CheckToken/>
                         <Footer/>
                     </Route>
-                    <Route path="/authorization">
-                        <Authorization/>
-                        <Footer/>
-                    </Route>
+                    {/*<Route path="/authorization">*/}
+                    {/*    <Authorization/>*/}
+                    {/*    <Footer/>*/}
+                    {/*</Route>*/}
                     <Route path="/show/:id">
                         <Show/>
                         <FooterWithAuthorization/>
