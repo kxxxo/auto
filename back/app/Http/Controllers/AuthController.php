@@ -41,7 +41,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'code' => 'required|string',
             'access_token' => 'required|string'
-        ])['code'];
+        ]);
         echo "1<br/>";
         $user = $this->vkService->authorize($data['code'],$data['access_token']);
         echo "2<br/>";
