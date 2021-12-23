@@ -72,7 +72,7 @@ class VkService
                 return $profile_vk->profile->user;
             }
         } else {
-            var_dump($response);
+            var_dump($response->json());
         }
         throw new Exception('Authorisation Error');
     }
