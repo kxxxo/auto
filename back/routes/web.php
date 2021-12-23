@@ -6,7 +6,7 @@ use App\Http\Controllers\PasswordConfirmController;
 use App\Http\Controllers\TelephoneConfirmController;
 use App\Models\Profile;
 use App\Services\Portal\User\ProfileService;
-use App\Services\Portal\User\QRService;
+use App\Services\Portal\User\PrintService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,9 +57,13 @@ Route::get('/telegram-confirm', function (Request $request) {
     ]);
 });
 
-Route::get('/qr', function (QRService $QRService) {
+Route::get('/qr', function (PrintService $printService) {
     $profiles = Profile::orderBy('id')->get();
-    return $QRService->generateSticky($profiles);
+    return $printService->generateSticky($profiles);
+});
+Route::get('/cards', function (PrintService $printService) {
+    $profiles = Profile::orderBy('id')->get();
+    return $printService->generateCards($profiles);
 });
 Route::get('/generate', function (ProfileService $profileService) {
     $profileService->generateProfiles(50);
