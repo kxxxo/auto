@@ -29,7 +29,11 @@ function ProfileConfig() {
                         setMail(response.data.mail);
                         setWhatsapp(response.data.whatsapp);
 
-                        axios.get(process.env.REACT_APP_API_DOMAIN + "/api/get-authorization-url")
+                        axios.get(process.env.REACT_APP_API_DOMAIN + "/api/get-authorization-url", {
+                            headers: {
+                                "Authorization": localStorage.getItem('Authorization')
+                            }
+                        })
                             .then(response => {
                                 if (response) {
                                     setUrlArray({

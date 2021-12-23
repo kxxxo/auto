@@ -38,10 +38,11 @@ class AuthController extends Controller
      */
     public function vk(Request $request)
     {
-        $access_token = $request->validate([
+        $data = $request->validate([
             'code' => 'required|string',
+            'access_token' => 'required|string'
         ])['code'];
-        $user = $this->vkService->authorize($access_token);
+        $user = $this->vkService->authorize($data['code'],$data['access_token']);
         $user_token = $user->createToken('token')->plainTextToken;
         return redirect(
             sprintf(
@@ -65,7 +66,7 @@ class AuthController extends Controller
             'photo_url' => 'required|string',
             'auth_date' => 'required|string',
             'hash' => 'required|string',
-            'access_token' => 'string'
+            'access_token' => 'required|string'
         ]);
         $access_token = $data['access_token'];
         unset($data['access_token']);

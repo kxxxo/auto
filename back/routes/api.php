@@ -97,15 +97,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             }
         });
     });
-});
 
-Route::get('/get-authorization-url', function (VkService $vkService) {
-    return [
-        'vk_url' => $vkService->generateUrlForAuth(),
-        'email_url' => getenv('APP_URL') . '/email-confirm',
-        'telephone_url' => getenv('APP_URL') . '/telephone-confirm',
-        'telegram_url' => getenv('APP_URL') . '/telegram-confirm'
-    ];
+    Route::get('/get-authorization-url', function (Request $request, VkService $vkService) {
+        return [
+            'vk_url' => $vkService->generateUrlForAuth($request->header('Authorization')),
+            'email_url' => getenv('APP_URL') . '/email-confirm',
+            'telephone_url' => getenv('APP_URL') . '/telephone-confirm',
+            'telegram_url' => getenv('APP_URL') . '/telegram-confirm'
+        ];
+    });
 });
 
 Route::get('/get-profile', function (Request $request) {

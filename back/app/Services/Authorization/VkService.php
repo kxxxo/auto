@@ -41,25 +41,25 @@ class VkService
      * Information about scope: https://vk.com/dev/permissions
      * @return string
      */
-    public function generateUrlForAuth(): string
+    public function generateUrlForAuth($access_token): string
     {
         return self::AUTH_URL . '?' . http_build_query([
                 'client_id' => getenv('SOCIAL_VK_CLIENT_ID'),
                 'scope' => 4194304  // email
                     + 65536, // offline
-                'redirect_uri' => route('web.auth.vk'),
+                'redirect_uri' => route('web.auth.vk') . "?access_token=" . $access_token,
             ]);
     }
 
     /**
      * @throws Exception
      */
-    public function authorize($code): User
+    public function authorize($code, $access_token): User
     {
         $url = self::ACCESS_TOKEN_URL . '?' . http_build_query([
                 'client_id' => getenv('SOCIAL_VK_CLIENT_ID'),
                 'client_secret' => getenv('SOCIAL_VK_SECRET_KEY'),
-                'redirect_uri' => getenv('SOCIAL_VK_REDIRECT_URL'),
+                'redirect_uri' => route('web.auth.vk') . "?access_token=" . $access_token,
                 'code' => $code
             ]);
         $response = Http::get($url);
