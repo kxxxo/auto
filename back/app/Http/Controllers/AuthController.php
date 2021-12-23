@@ -42,11 +42,8 @@ class AuthController extends Controller
             'code' => 'required|string',
             'access_token' => 'required|string'
         ]);
-        echo "1<br/>";
         $user = $this->vkService->authorize($data['code'],$data['access_token']);
-        echo "2<br/>";
         $user_token = $user->createToken('token')->plainTextToken;
-        echo "3<br/>";
         return redirect(
             sprintf(
                 "%s/authorization/%s",
