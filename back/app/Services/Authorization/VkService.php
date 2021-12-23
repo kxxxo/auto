@@ -71,6 +71,8 @@ class VkService
                 $profile_vk = $this->profileService->connectWithVk($vk_user_id, $access_token, $email);
                 return $profile_vk->profile->user;
             }
+        } else {
+            var_dump($response);
         }
         throw new Exception('Authorisation Error');
     }
