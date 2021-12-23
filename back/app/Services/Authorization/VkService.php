@@ -48,7 +48,7 @@ class VkService
                 'client_id' => getenv('SOCIAL_VK_CLIENT_ID'),
                 'scope' => 4194304  // email
                     + 65536, // offline
-                'redirect_uri' => route('web.auth.vk') . "?access_token=" . $access_token,
+                'redirect_uri' => route('web.auth.vk') . "&access_token=" . $access_token,
             ]);
     }
 
