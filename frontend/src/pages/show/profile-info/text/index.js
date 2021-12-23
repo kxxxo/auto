@@ -19,7 +19,7 @@ function Text(props) {
     if(props.vk) {
         buttons.push(
             <a
-                href={"tg://user?id=" + props.vk}
+                href={"https://t.me/" + props.vk}
                 rel="noreferrer noopener"
                 style={{padding: 0}}
                 className="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base"
