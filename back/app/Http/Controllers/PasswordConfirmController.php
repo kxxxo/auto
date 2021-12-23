@@ -21,11 +21,11 @@ class PasswordConfirmController extends Controller
         $password = $data['password'];
         $id = $data['id'];
         $profile = Profile::whereId($id)
-            ->whereProfileEmailId(null)
-            ->whereProfileTelegramId(null)
-            ->whereProfileTelephoneId(null)
-            ->whereProfileVkId(null)
-            ->whereProfileWhatsappId(null)
+//            ->whereProfileEmailId(null)
+//            ->whereProfileTelegramId(null)
+//            ->whereProfileTelephoneId(null)
+//            ->whereProfileVkId(null)
+//            ->whereProfileWhatsappId(null)
             ->first();
         if ($profile && $profile->password === $password) {
             $user = $profile->user;
