@@ -62,8 +62,11 @@ class VkService
                 'redirect_uri' => route('web.auth.vk') . "?access_token=" . $access_token,
                 'code' => $code
             ]);
+        echo "1.1<br/>";
         $response = Http::get($url);
+        echo "1.2<br/>";
         if ($response->ok()) {
+            echo "1.3<br/>";
             $access_token = $response->json('access_token');
             $vk_user_id = $response->json('user_id');
             $email = $response->json('email');
