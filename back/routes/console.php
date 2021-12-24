@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Notification\TelegramService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -18,6 +19,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Artisan::command('cpu', function (){
+Artisan::command('cpu', function (TelegramService $telegramService){
     var_dump(sys_getloadavg());
+    $telegramService->sendMessage("Ку-ку");
+
 });

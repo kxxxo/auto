@@ -26,11 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(function (TelegramService $telegramService) {
-            $telegramService->sendMessage("Ку-ку");
-//            $data = sys_getloadavg();
-//            DB::table('recent_users')->delete();
-        })->everyMinute();
+//        $schedule->call(function (TelegramService $telegramService) {
+////            $data = sys_getloadavg();
+////            DB::table('recent_users')->delete();
+//        })->everyMinute();
     }
 
     /**
