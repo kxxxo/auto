@@ -27,8 +27,7 @@ use Eloquent;
  */
 class Monitor extends Model
 {
-    use HasFactory;
-
+    public $timestamps = true;
     /**
      * @var array
      */

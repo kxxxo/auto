@@ -30,6 +30,6 @@ class CpuMonitoring extends Migration
      */
     public function down()
     {
-        Schema::drop('monitor');
+        Schema::drop('monitors');
     }
 }
