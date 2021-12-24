@@ -27,6 +27,7 @@ Artisan::command('cpu', function (TelegramService $telegramService){
     echo Monitor::insert([
         'cpu' => $cpu[1],
         'free_disk' => (string)$free_disk,
-        'max_disk' => (string)$max_disk
+        'max_disk' => (string)$max_disk,
+        'created_at' => date('Y-m-d H:i:s')
     ]).PHP_EOL  ;
 });

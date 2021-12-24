@@ -18,7 +18,6 @@ class CpuMonitoring extends Migration
             $table->float('cpu');
             $table->float('free_disk');
             $table->float('max_disk');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
