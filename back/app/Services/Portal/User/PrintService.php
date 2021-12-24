@@ -22,7 +22,7 @@ class PrintService
         $pdf->SetAuthor('kxxo.ru');
         $pdf->SetTitle('Profile QR Code');
         $pdf->SetSubject('Your QR Code');
-        $pdf->SetKeywords('QR, kxxo.ru, auto.kxxo.ru');
+        $pdf->SetKeywords(getenv('APP_NAME'));
 
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 

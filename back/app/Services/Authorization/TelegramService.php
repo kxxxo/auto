@@ -12,11 +12,6 @@ use Exception;
  */
 class TelegramService
 {
-    private const WIDGET = '<script async src="https://telegram.org/js/telegram-widget.js?15"
-        data-telegram-login="KxxoBot" data-size="small" data-userpic="false"
-        data-auth-url="https://api.auto.kxxo.ru/auth/tg"
-        data-request-access="write"></script>';
-
     /**
      * @var ProfileService
      */
