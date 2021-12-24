@@ -25,7 +25,7 @@ Artisan::command('cpu', function (TelegramService $telegramService){
     $free_disk = round(disk_free_space('/')/1024/1024/1024,2);
     $max_disk = round(disk_total_space('/')/1024/1024/1024,2);
     echo Monitor::insert([
-        'cpu' => (string)$cpu,
+        'cpu' => $cpu[1],
         'free_disk' => (string)$free_disk,
         'max_disk' => (string)$max_disk
     ]).PHP_EOL  ;
