@@ -21,7 +21,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('cpu', function (TelegramService $telegramService){
     var_dump(sys_getloadavg());
-    echo disk_free_space('/')/1024/1024 . " из " . disk_total_space('/')/1024/1024;
+    echo round(disk_free_space('/')/1024/1024/1024,2) . " из " . round(disk_total_space('/')/1024/1024/1024,2);
 //    $telegramService->sendMessage("Ку-ку");
 //    DB::table('recent_users')->delete();
 });
