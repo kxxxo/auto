@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Monitor;
 use App\Services\Notification\TelegramService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -23,11 +24,9 @@ Artisan::command('cpu', function (TelegramService $telegramService){
     $cpu = sys_getloadavg();
     $free_disk = round(disk_free_space('/')/1024/1024/1024,2);
     $max_disk = round(disk_total_space('/')/1024/1024/1024,2);
-    echo DB::table('monitor')->insert([
-        [
-            'cpu' => $cpu,
-            'free_disk' => $free_disk,
-            'max_disk' => $max_disk
-        ]
-    ]).PHP_EOL;
+    echo Monitor::insert([
+        'cpu' => $cpu,
+        'free_disk' => $free_disk,
+        'max_disk' => $max_disk
+    ]).PHP_EOL  ;
 });
