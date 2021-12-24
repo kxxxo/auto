@@ -20,8 +20,12 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('cpu', function (TelegramService $telegramService){
-    var_dump(sys_getloadavg());
-    echo round(disk_free_space('/')/1024/1024/1024,2) . " из " . round(disk_total_space('/')/1024/1024/1024,2);
-//    $telegramService->sendMessage("Ку-ку");
-//    DB::table('recent_users')->delete();
+    $cpu = sys_getloadavg();
+    $free_disk = round(disk_free_space('/')/1024/1024/1024,2);
+    $max_disk = round(disk_total_space('/')/1024/1024/1024,2);
+    echo DB::table('monitor')->insert([
+        'cpu' => $cpu,
+        'free_disk' => $free_disk,
+        'max_disk' => $max_disk
+    ]).PHP_EOL;
 });

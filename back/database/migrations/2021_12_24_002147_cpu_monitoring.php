@@ -15,6 +15,9 @@ class CpuMonitoring extends Migration
     {
         Schema::create('monitor', function (Blueprint $table) {
             $table->id();
+            $table->float('cpu');
+            $table->float('free_disk');
+            $table->float('max_disk');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ class CpuMonitoring extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('monitor');
     }
 }
