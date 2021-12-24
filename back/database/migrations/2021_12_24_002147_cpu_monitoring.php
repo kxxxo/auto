@@ -13,7 +13,7 @@ class CpuMonitoring extends Migration
      */
     public function up()
     {
-        Schema::create('monitor', function (Blueprint $table) {
+        Schema::create('monitors', function (Blueprint $table) {
             $table->id();
             $table->float('cpu');
             $table->float('free_disk');
