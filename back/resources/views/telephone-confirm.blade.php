@@ -81,6 +81,8 @@
 <body>
 <div class="center">
     <div id="send-telephone-form">
+        <h3 style="text-align: center;">Введите телефон</h3>
+        <br/>
         <input type='tel'
                placeholder="+7 (965) 000-00-00"
                id="telephone-input"
@@ -90,6 +92,8 @@
         </button>
     </div>
     <div id="send-code-form">
+        <h3 style="text-align: center;">Введите код</h3>
+        <br/>
         <input type='text'
                placeholder="000000"
                id="code-input"

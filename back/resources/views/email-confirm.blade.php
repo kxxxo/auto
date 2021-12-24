@@ -83,6 +83,8 @@
 <body>
 <div class="center">
     <div id="send-email-form">
+        <h3 style="text-align: center;">Введите email</h3>
+        <br/>
         <input type='email'
                placeholder="info@mail.ru"
                id="email-input"
@@ -92,6 +94,9 @@
         </button>
     </div>
     <div id="send-code-form">
+        <h3 style="text-align: center;">Введите код</h3>
+        <br/>
+
         <input type='text'
                placeholder="000000"
                id="code-input"
