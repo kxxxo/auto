@@ -35,7 +35,9 @@ class Monitor extends Model
     protected $fillable = [
         'cpu',
         'free_disk',
-        'max_disk'
+        'max_disk',
+        'created_at',
+        'updated_at',
     ];
 
 }
