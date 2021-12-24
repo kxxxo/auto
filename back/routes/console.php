@@ -21,6 +21,7 @@ Artisan::command('inspire', function () {
 
 Artisan::command('cpu', function (TelegramService $telegramService){
     var_dump(sys_getloadavg());
-    $telegramService->sendMessage("Ку-ку");
-
+    var_dump(Storage::disk()->getAvailableStorage());
+//    $telegramService->sendMessage("Ку-ку");
+//    DB::table('recent_users')->delete();
 });
