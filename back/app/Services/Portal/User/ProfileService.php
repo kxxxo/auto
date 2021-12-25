@@ -76,32 +76,40 @@ class ProfileService
         string $email,
         User $user = null
     ): ProfileVk {
+        /**
+         * Поиск или создание пользователя
+         */
+        if ($user) {
+            $profile = Profile::whereUserId($user->id)->first();
+        } else {
+            $user = $this->userService->create();
+            $profile = $this->create($user);
+
+        }
+
+        /**
+         * Поиск или создание профиля Whatsapp
+         */
         $profile_vk = ProfileVk::whereExternalId($external_id)->first();
         if (!$profile_vk) {
             $profile_vk = new ProfileVk(
                 [
                     'external_id' => $external_id,
-                    'access_token' => $access_token,
                     'email' => $email
                 ]
             );
             if (!$profile_vk->save()) {
                 throw new Exception("Profile vk save error");
             }
-            if (!$user) {
-                $user = $this->userService->create();
-                $profile = $this->create($user);
-            } else {
-                $profile = Profile::whereUserId($user->id)->first();
-            }
-            $profile->profile_vk_id = $profile_vk->id;
-            $profile->save();
-        } else {
-            $profile_vk->access_token = $access_token;
-            if (!$profile_vk->save()) {
-                throw new Exception("Profile vk save error");
-            }
         }
+
+        /**
+         * Привязка профиля vk, обновление токена
+         */
+        $profile_vk->access_token = $access_token;
+        $profile_vk->save();
+        $profile->profile_vk_id = $profile_vk->id;
+        $profile->save();
         return $profile_vk;
     }
 
@@ -116,6 +124,19 @@ class ProfileService
         $photo_url,
         User $user = null
     ): ProfileTelegram {
+        /**
+         * Поиск или создание пользователя
+         */
+        if ($user) {
+            $profile = Profile::whereUserId($user->id)->first();
+        } else {
+            $user = $this->userService->create();
+            $profile = $this->create($user);
+        }
+
+        /**
+         * Поиск или создание профиля Whatsapp
+         */
         $profile_telegram = ProfileTelegram::whereExternalId($external_id)->first();
         if (!$profile_telegram) {
             $profile_telegram = new ProfileTelegram([
@@ -128,24 +149,18 @@ class ProfileService
             if (!$profile_telegram->save()) {
                 throw new Exception("Profile telegram save error");
             }
-            if (!$user) {
-                $user = $this->userService->create();
-                $profile = $this->create($user);
-            } else {
-                $profile = Profile::whereUserId($user->id)->first();
-            }
-
-            $profile->profile_telegram_id = $profile_telegram->id;
-            $profile->save();
-        } else {
-            $profile_telegram->first_name = $first_name;
-            $profile_telegram->last_name = $last_name;
-            $profile_telegram->username = $username;
-            $profile_telegram->photo_url = $photo_url;
-            if (!$profile_telegram->save()) {
-                throw new Exception("Profile telegram save error");
-            }
         }
+
+        /**
+         * Привязка профиля telegram, обновление данных
+         */
+        $profile_telegram->first_name = $first_name;
+        $profile_telegram->last_name = $last_name;
+        $profile_telegram->username = $username;
+        $profile_telegram->photo_url = $photo_url;
+        $profile->profile_telegram_id = $profile_telegram->id;
+        $profile->save();
+
         return $profile_telegram;
     }
 
@@ -154,6 +169,19 @@ class ProfileService
      */
     public function connectWithTelephone($external_id, User $user = null): ProfileTelephone
     {
+        /**
+         * Поиск или создание пользователя
+         */
+        if ($user) {
+            $profile = Profile::whereUserId($user->id)->first();
+        } else {
+            $user = $this->userService->create();
+            $profile = $this->create($user);
+        }
+
+        /**
+         * Поиск или создание Телефонного профиля
+         */
         $profile_telephone = ProfileTelephone::whereExternalId($external_id)->first();
         if (!$profile_telephone) {
             $profile_telephone = new ProfileTelephone([
@@ -162,16 +190,13 @@ class ProfileService
             if (!$profile_telephone->save()) {
                 throw new Exception("Profile telephone save error");
             }
-            if (!$user) {
-                $user = $this->userService->create();
-                $profile = $this->create($user);
-            } else {
-                $profile = Profile::whereUserId($user->id)->first();
-            }
-
-            $profile->profile_telephone_id = $profile_telephone->id;
-            $profile->save();
         }
+
+        /**
+         * Привязка телефонного профиля
+         */
+        $profile->profile_telephone_id = $profile_telephone->id;
+        $profile->save();
         return $profile_telephone;
     }
 
@@ -180,6 +205,19 @@ class ProfileService
      */
     public function connectWithWhatsapp($external_id, User $user = null): ProfileWhatsapp
     {
+        /**
+         * Поиск или создание пользователя
+         */
+        if($user) {
+            $profile = Profile::whereUserId($user->id)->first();
+        } else {
+            $user = $this->userService->create();
+            $profile = $this->create($user);
+        }
+
+        /**
+         * Поиск или создание профиля Whatsapp
+         */
         $profile_whatsapp = ProfileWhatsapp::whereExternalId($external_id)->first();
         if (!$profile_whatsapp) {
             $profile_whatsapp = new ProfileWhatsapp([
@@ -188,16 +226,13 @@ class ProfileService
             if (!$profile_whatsapp->save()) {
                 throw new Exception("Profile whatsapp save error");
             }
-            if (!$user) {
-                $user = $this->userService->create();
-                $profile = $this->create($user);
-            } else {
-                $profile = Profile::whereUserId($user->id)->first();
-            }
-
-            $profile->profile_whatsapp_id = $profile_whatsapp->id;
-            $profile->save();
         }
+
+        /**
+         * Привязка профиля whatsapp
+         */
+        $profile->profile_whatsapp_id = $profile_whatsapp->id;
+        $profile->save();
         return $profile_whatsapp;
     }
 
@@ -206,6 +241,19 @@ class ProfileService
      */
     public function connectWithEmail($external_id, User $user = null): ProfileMail
     {
+        /**
+         * Поиск или создание пользователя
+         */
+        if ($user) {
+            $profile = Profile::whereUserId($user->id)->first();
+        } else {
+            $user = $this->userService->create();
+            $profile = $this->create($user);
+        }
+
+        /**
+         * Поиск или создание профиля Email
+         */
         $profile_email = ProfileMail::whereExternalId($external_id)->first();
         if (!$profile_email) {
             $profile_email = new ProfileMail([
@@ -214,16 +262,12 @@ class ProfileService
             if (!$profile_email->save()) {
                 throw new Exception("Profile email save error");
             }
-            if (!$user) {
-                $user = $this->userService->create();
-                $profile = $this->create($user);
-            } else {
-                $profile = Profile::whereUserId($user->id)->first();
-            }
-
-            $profile->profile_email_id = $profile_email->id;
-            $profile->save();
         }
+        /**
+         * Привязка профиля Email
+         */
+        $profile->profile_email_id = $profile_email->id;
+        $profile->save();
         return $profile_email;
     }
 
