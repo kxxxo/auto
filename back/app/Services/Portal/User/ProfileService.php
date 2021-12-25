@@ -230,8 +230,9 @@ class ProfileService
             /**
              * Отвязываем от прошлого владельца
              */
-            $profile_whatsapp->profile->profile_whatsapp_id = null;
-            $profile_whatsapp->save();
+            Profile::query()
+                ->where('profile_whatsapp_id',$profile_whatsapp->id)
+                ->update(['profile_whatsapp_id' => null]);
         }
 
         /**
