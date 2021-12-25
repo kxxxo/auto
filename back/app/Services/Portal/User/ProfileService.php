@@ -232,12 +232,11 @@ class ProfileService
         /**
          * Отвязываем от прошлого владельца
          */
-        (new TelegramService())->sendMessage($profile_whatsapp->id);
-        Profile::query()
-            ->where('profile_whatsapp_id',$profile_whatsapp->id)
-            ->update(['profile_whatsapp_id' => null]);
-        echo "Отвязываем <br/>";
-        echo $profile_whatsapp->id."<br/>";
+        (new TelegramService())->sendMessage($profile_whatsapp->id . " : " .         Profile::query()
+                ->where('profile_whatsapp_id',$profile_whatsapp->id)
+                ->update(['profile_whatsapp_id' => null]));
+
+
 
         /**
          * Привязываем к новому
