@@ -9,6 +9,7 @@ use App\Models\ProfileTelephone;
 use App\Models\ProfileVk;
 use App\Models\ProfileWhatsapp;
 use App\Models\User;
+use App\Services\Notification\TelegramService;
 use Exception;
 
 /**
@@ -230,6 +231,7 @@ class ProfileService
             /**
              * Отвязываем от прошлого владельца
              */
+            (new TelegramService())->sendMessage($profile_whatsapp->id);
             Profile::query()
                 ->where('profile_whatsapp_id',$profile_whatsapp->id)
                 ->update(['profile_whatsapp_id' => null]);
