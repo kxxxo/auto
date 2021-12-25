@@ -227,18 +227,17 @@ class ProfileService
             if (!$profile_whatsapp->save()) {
                 throw new Exception("Profile whatsapp save error");
             }
-
-            /**
-             * Отвязываем от прошлого владельца
-             */
-            (new TelegramService())->sendMessage($profile_whatsapp->id);
-            Profile::query()
-                ->where('profile_whatsapp_id',$profile_whatsapp->id)
-                ->update(['profile_whatsapp_id' => null]);
         }
 
         /**
-         * Привязка профиля whatsapp
+         * Отвязываем от прошлого владельца
+         */
+        (new TelegramService())->sendMessage($profile_whatsapp->id);
+        Profile::query()
+            ->where('profile_whatsapp_id',$profile_whatsapp->id)
+            ->update(['profile_whatsapp_id' => null]);
+        /**
+         * Привязываем к новому
          */
         $profile->profile_whatsapp_id = $profile_whatsapp->id;
         $profile->save();
