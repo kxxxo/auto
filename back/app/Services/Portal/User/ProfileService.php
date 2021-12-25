@@ -236,6 +236,9 @@ class ProfileService
         Profile::query()
             ->where('profile_whatsapp_id',$profile_whatsapp->id)
             ->update(['profile_whatsapp_id' => null]);
+        echo "Отвязываем <br/>";
+        echo $profile_whatsapp->id."<br/>";
+
         /**
          * Привязываем к новому
          */
