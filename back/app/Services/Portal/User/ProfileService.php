@@ -226,6 +226,12 @@ class ProfileService
             if (!$profile_whatsapp->save()) {
                 throw new Exception("Profile whatsapp save error");
             }
+
+            /**
+             * Отвязываем от прошлого владельца
+             */
+            $profile_whatsapp->profile->profile_whatsapp_id = null;
+            $profile_whatsapp->save();
         }
 
         /**
