@@ -33,10 +33,10 @@ class TelegramService
     public function authorize($data, $user = null): User
     {
         $tg_id = $data['id'];
-        $tg_first_name = $data["first_name"];
-        $tg_last_name = $data["last_name"];
-        $tg_username = $data["username"];
-        $tg_photo_url = $data["photo_url"];
+        $tg_first_name = $data["first_name"] ?? '';
+        $tg_last_name = $data["last_name"] ?? '';
+        $tg_username = $data["username"] ?? '';
+        $tg_photo_url = $data["photo_url"] ?? '';
 
         if ($this->check($data)) {
             $profile_vk = $this->profileService->connectWithTelegram(
