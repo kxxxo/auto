@@ -104,6 +104,14 @@ class ProfileService
             }
         }
 
+
+        /**
+         * Отвязываем от прошлого владельца
+         */
+        Profile::query()
+            ->where('profile_vk_id',$profile_vk->id)
+            ->update(['profile_vk_id' => null]);
+
         /**
          * Привязка профиля vk, обновление токена
          */
@@ -153,6 +161,13 @@ class ProfileService
         }
 
         /**
+         * Отвязываем от прошлого владельца
+         */
+        Profile::query()
+            ->where('profile_telegram_id',$profile_telegram->id)
+            ->update(['profile_telegram_id' => null]);
+
+        /**
          * Привязка профиля telegram, обновление данных
          */
         $profile_telegram->first_name = $first_name;
@@ -194,7 +209,14 @@ class ProfileService
         }
 
         /**
-         * Привязка телефонного профиля
+         * Отвязываем от прошлого владельца
+         */
+        Profile::query()
+            ->where('profile_telephone_id',$profile_telephone->id)
+            ->update(['profile_telephone_id' => null]);
+
+        /**
+         * Привязка к новому
          */
         $profile->profile_telephone_id = $profile_telephone->id;
         $profile->save();
@@ -232,10 +254,9 @@ class ProfileService
         /**
          * Отвязываем от прошлого владельца
          */
-        (new TelegramService())->sendMessage($profile_whatsapp->id . " : " .         Profile::query()
-                ->where('profile_whatsapp_id',$profile_whatsapp->id)
-                ->update(['profile_whatsapp_id' => null]));
-
+        Profile::query()
+            ->where('profile_whatsapp_id',$profile_whatsapp->id)
+            ->update(['profile_whatsapp_id' => null]);
 
 
         /**
@@ -243,6 +264,9 @@ class ProfileService
          */
         $profile->profile_whatsapp_id = $profile_whatsapp->id;
         $profile->save();
+        if (!$profile->save()) {
+            (new TelegramService())->sendMessage("Profile whatsapp save error");
+        }
         return $profile_whatsapp;
     }
 
@@ -273,8 +297,16 @@ class ProfileService
                 throw new Exception("Profile email save error");
             }
         }
+
         /**
-         * Привязка профиля Email
+         * Отвязываем от прошлого владельца
+         */
+        Profile::query()
+            ->where('profile_email_id',$profile_email->id)
+            ->update(['profile_email_id' => null]);
+
+        /**
+         * Привязка к новому профилю Email
          */
         $profile->profile_email_id = $profile_email->id;
         $profile->save();
