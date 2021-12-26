@@ -61,10 +61,10 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'id' => 'required|string',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'string',
+            'last_name' => 'string',
             'username' => 'required|string',
-            'photo_url' => 'required|string',
+            'photo_url' => 'string',
             'auth_date' => 'required|string',
             'hash' => 'required|string',
             'access_token' => 'required|string'
