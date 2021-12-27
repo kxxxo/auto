@@ -91,7 +91,6 @@ class VkService
             ]);
         $response = Http::get($url);
         if ($response->ok()) {
-            $this->telegram->sendMessage($response->body());
             return true;
         }
         return false;
