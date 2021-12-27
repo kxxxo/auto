@@ -95,7 +95,7 @@ class PrintService
                 1 + (($column) * ($pdf_width / $colums_num)),
 //                2,
                 //2 + ($i % $rows_num * ($pdf_height / $rows_num)),
-                15 + (($row) * ($pdf_height / $rows_num)),
+                2 + (($row) * ($pdf_height / $rows_num)),
                 $qr_size, $qr_size, $style, 'N');
 
 
