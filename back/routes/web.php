@@ -50,7 +50,6 @@ Route::prefix('/password-confirm')->group(function () {
     Route::get('/auth', [PasswordConfirmController::class,'auth']);
 });
 
-
 Route::get('/telegram-confirm', function (Request $request) {
     return view('telegram-confirm')->with([
         'access_token' => $request->get('access_token')
