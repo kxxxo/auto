@@ -61,7 +61,7 @@ Route::get('/qr', function (PrintService $printService) {
     return $printService->generateSticky($profiles);
 });
 Route::get('/cards', function (PrintService $printService) {
-    $profiles = Profile::orderBy('id')->get();
+    $profiles = Profile::whereNotIn('id',[28,29])->orderBy('id')->get();
     return $printService->generateCards($profiles);
 });
 Route::get('/generate', function (ProfileService $profileService) {
