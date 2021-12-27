@@ -57,7 +57,9 @@ Route::get('/telegram-confirm', function (Request $request) {
 });
 
 Route::get('/qr', function (PrintService $printService) {
-    $profiles = Profile::orderBy('id')->get();
+    $profiles = Profile::whereIn('id',[
+        3,4,5,7,8,9,19,20,21,22,23,24,25,26,27,30,32,53,54,55,56,57,58,59,60,61,62
+    ])->get();
     return $printService->generateSticky($profiles);
 });
 Route::get('/cards', function (PrintService $printService) {
