@@ -66,7 +66,6 @@ class VkService
         $response = Http::get($url);
         if ($response->ok()) {
             /** @var $user User */
-            echo "Find by " . substr($access_token,7) . "<br/>";
             $user = PersonalAccessToken::findToken(substr($access_token,7))->tokenable()->first();
             $access_token = $response->json('access_token');
             $vk_user_id = $response->json('user_id');

@@ -96,7 +96,8 @@ class ProfileService
             $profile_vk = new ProfileVk(
                 [
                     'external_id' => $external_id,
-                    'email' => $email
+                    'email' => $email,
+                    'access_token' => $access_token
                 ]
             );
             if (!$profile_vk->save()) {
