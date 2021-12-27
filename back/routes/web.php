@@ -65,5 +65,5 @@ Route::get('/cards', function (PrintService $printService) {
     return $printService->generateCards($profiles);
 });
 Route::get('/generate', function (ProfileService $profileService) {
-    $profileService->generateProfiles(50);
+    $profileService->generateProfiles(1);
 });
