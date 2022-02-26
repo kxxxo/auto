@@ -58,7 +58,7 @@ Route::get('/telegram-confirm', function (Request $request) {
 
 Route::get('/qr', function (PrintService $printService) {
     $profiles = Profile::whereIn('id',[
-        3,4,5,7,8,9,19,20,21,22,23,24,25,26,27,30,32,53,54,55,56,57,58,59,60,61,62
+        63
     ])->get();
     return $printService->generateSticky($profiles);
 });
@@ -69,3 +69,8 @@ Route::get('/cards', function (PrintService $printService) {
 Route::get('/generate', function (ProfileService $profileService) {
     $profileService->generateProfiles(1);
 });
+Route::get('/send-sms', function (\App\Services\Notification\TelephoneService $telephoneService) {
+    $telephoneService->sendMessage('79871894192','Ваш код активации: 771867');
+});
+
+
